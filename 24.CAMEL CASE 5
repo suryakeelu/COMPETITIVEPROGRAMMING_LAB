@@ -1,0 +1,15 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n = int(input())
+words = input().split(',')
+pattern = input().strip()
+result = []
+for word in words:
+    abb = ''.join(ch for ch in word if ch.isupper())
+    if abb.startswith(pattern):
+        result.append((abb,word))
+result.sort()
+if not result:
+    print("No match found")
+else:
+    for abb, word in result:
+        print(word)
