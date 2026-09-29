@@ -1,0 +1,38 @@
+n, m = map(int, input().split())
+
+arr1 = list(map(int, input().split()))
+arr2 = list(map(int, input().split()))
+
+i = 0
+j = 0
+arr = []
+
+while i < n and j < m:
+    if arr1[i] <= arr2[j]:
+        arr.append(arr1[i])
+        i += 1
+    else:
+        arr.append(arr2[j])
+        j += 1
+
+while i < n:
+    arr.append(arr1[i])
+    i += 1
+
+while j < m:
+    arr.append(arr2[j])
+    j += 1
+
+length = n + m
+
+if length % 2 == 1:
+    print(arr[length // 2])
+else:
+    a = arr[length // 2 - 1]
+    b = arr[length // 2]
+    total = a + b
+
+    if total % 2 == 0:
+        print(f"{total // 2}.0")
+    else:
+        print(f"{total / 2:.1f}")
