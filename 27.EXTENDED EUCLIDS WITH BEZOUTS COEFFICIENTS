@@ -1,0 +1,35 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+def extended_gcd(a, b):
+    if b == 0:
+        return a, 1, 0
+
+    gcd, x1, y1 = extended_gcd(b, a % b)
+
+    x = y1
+    y = x1 - (a // b) * y1
+
+    return gcd, x, y
+
+A, B = map(int, input().split())
+
+D, x0, y0 = extended_gcd(A, B)
+
+
+px = B // D
+py = A // D
+
+k0 = -x0 // px
+
+candidates = []
+
+for k in range(k0 - 2, k0 + 3):
+    x = x0 + k * px
+    y = y0 - k * py
+
+    candidates.append((abs(x) + abs(y), x > y, x, y))
+
+candidates.sort()
+
+_, _, x, y = candidates[0]
+
+print(x, y, D)
