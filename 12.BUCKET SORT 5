@@ -1,0 +1,20 @@
+import sys
+
+data = sys.stdin.read().split()
+
+n = int(data[0])
+arr = list(map(float, data[1:n + 1]))
+
+buckets = [[] for _ in range(n)]
+
+for x in arr:
+    index = int(x * n)
+    buckets[index].append(x)
+
+result = []
+
+for bucket in buckets:
+    bucket.sort()
+    result.extend(bucket)
+
+print(" ".join(f"{x:.2f}" for x in result))
