@@ -1,0 +1,38 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import deque
+
+N, M = map(int, input().split())
+
+grid = []
+queue = deque()
+fresh = 0
+
+for i in range(N):
+    row = list(map(int, input().split()))
+    grid.append(row)
+
+    for j in range(M):
+        if row[j] == 2:
+            queue.append((i, j, 0))
+        elif row[j] == 1:
+            fresh += 1
+
+time = 0
+
+while queue:
+    i, j, t = queue.popleft()
+    time = max(time, t)
+
+    for di, dj in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+        ni = i + di
+        nj = j + dj
+
+        if 0 <= ni < N and 0 <= nj < M and grid[ni][nj] == 1:
+            grid[ni][nj] = 2
+            fresh -= 1
+            queue.append((ni, nj, t + 1))
+
+if fresh > 0:
+    print(-1)
+else:
+    print(time)
